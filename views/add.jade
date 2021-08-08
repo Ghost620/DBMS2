@@ -1,0 +1,76 @@
+doctype html(lang='en')
+head
+    title Bootstrap Example
+    |   
+    meta(charset='utf-8')
+    |   
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    |   
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css')
+    |   
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    |   
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
+  body
+    .container
+      if(cond=='add')
+        h2 ADD a new entry to #{tablename}
+      else
+        h2 EDIT this entry of #{tablename}
+      |   
+      hr.featurette-divider
+      form(action='/action' method="POST")
+        input(type='text' name='tablename' value='#{tablename}' style='display:none;')
+        if(cond=='add')
+            input(type="text" name="task" value="add" style="display:none;")
+            each val in data
+                .form-group
+                label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
+                |  
+                if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
+                else if(val.DATA_TYPE=='int')
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+                else if(val.IS_NULLABLE=='NO')
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' required)
+                else
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}')
+         
+                |  
+        else 
+            input(type="text" name="id" value="#{id}" style="display:none;")
+            input(type="text" name="task" value="edit" style="display:none;")
+            each val in data 
+                .form-group
+                label(for='#{val.DATA_TYPE}') #{val.COLUMN_NAME}:
+                |  
+                if((val.IS_NULLABLE=='NO') && (val.DATA_TYPE=='int'))
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}" required)
+                else if(val.DATA_TYPE=='int')
+                    input.form-control(type='number', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME} value="#{rows[0][val.COLUMN_NAME]}"')
+                else if(val.IS_NULLABLE=='NO')
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}" required)
+                else
+                    input.form-control(type='#{val.DATA_TYPE}', placeholder='Enter #{val.COLUMN_NAME}', name='#{val.COLUMN_NAME}' value="#{rows[0][val.COLUMN_NAME]}")
+
+        |     
+        p
+        hr.featurette-divider
+          
+        |     
+        button.btn.btn-success(type='submit') Submit
+
+        |         
+      footer.footer
+        .container-fluid
+          nav.pull-left
+            ul
+
+          |                 
+          p.copyright.pull-right
+            | &copy; 
+            script.
+              document.write(new Date().getFullYear())
+            |  
+            a(href='/') WIMS
+

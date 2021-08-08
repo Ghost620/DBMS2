@@ -1,0 +1,198 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    | &#x9;
+    link(rel='icon', type='image/png', href='/images/favicon.ico')
+    | &#x9;
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    | &#x9;
+    title WIMS - We Manage
+    | &#x9;
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    |     
+    meta(name='viewport', content='width=device-width')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    // Animation library for notifications
+    link(href='/stylesheets/animate.min.css', rel='stylesheet')
+    // Light Bootstrap Table core CSS
+    link(href='/stylesheets/light-bootstrap-dashboard.css?v=1.4.0', rel='stylesheet')
+    // CSS for Demo Purpose, don't include it in your project
+    link(href='/stylesheets/demo.css', rel='stylesheet')
+    // Fonts and icons
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    |     
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300', rel='stylesheet', type='text/css')
+    |     
+    link(href='/stylesheets/pe-icon-7-stroke.css', rel='stylesheet')
+    link(rel='canonical' href='https://getbootstrap.com/docs/4.0/components/buttons/')
+    link(rel="stylesheet" href="/stylesheets/style.css")
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src="/javascripts/mine.js")
+    
+  body
+    .wrapper.d-flex.justify-content-center
+      .sidebar(data-color='', data-image='/images/sidebar-4.jpg')
+        .sidebar-wrapper
+          .logo
+            a.simple-text(href='/')
+              | WIMS
+          |             
+          ul.nav
+            li.active
+              a(href='/')
+                i.pe-7s-graph
+                |                         
+                p DASHBOARD
+            |                 
+            li
+              a(href='/team')
+                i.pe-7s-users
+                |                         
+                p TEAM
+            |                 
+            li
+              a(href='/about')
+                i.pe-7s-note2
+                |                         
+                p ABOUT
+            |                 
+            li
+              a(href='/contactUs')
+                i.pe-7s-news-paper
+                |                         
+                p CONTACT US
+            
+            | &#x9;&#x9;&#x9;&#x9;
+            li.active-pro
+              a(href='')
+                i.pe-7s-user
+                |                         
+                p User : #{user}
+      |     
+      .main-panel
+        nav.navbar.navbar-default.navbar-fixed
+          .container-fluid
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navigation-example-2')
+                span.sr-only Toggle navigation
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+              |                     
+              h2 DASHBOARD
+            |                 
+            .collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-left
+                    
+              |                     
+              ul.nav.navbar-nav.navbar-right
+                |                         
+                li
+                  button.btn.btn-danger.logbtn#ez(type='button' onclick="window.location.href='/logout'")
+                    | LOGOUT
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li.separator.hidden-lg
+        |         
+        .content
+          .container-fluid.my-4
+          - i=0
+          form(method="POST" action="/add")
+            -if (message){
+                  h4.alert.alert-warning.mt-4 #{message}
+                  -}
+            -else{
+                each val in data
+                  .container-fluid
+                    .row
+                      .col-md-12
+                        .card
+                          .header
+                            h2.title #{tablenames[i]}
+                              -if(cond == 'table'){
+                                button(class="btn btn-success fr gg" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="VIEW") VIEW
+                                button(class="btn btn-primary fr" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD") ADD
+                              -} else{
+                                <button class="btn btn-primary fr gg" type="submit" id="#{tablenames[i]}" name="#{tablenames[i]}" value="ADD">ADD</button>
+                                .fr
+                                  select.form-select(aria-label='Disabled select example',id="selectbox",placeholder="search",name='selectbox' class="hamza")
+                                    option(selected='' Disabled hidden) Search By..
+                                      | 
+                                    input(type='text', placeholder='Search..', name='search', class="hamza")
+                                    button(type='submit',class="btn btn-primary sbtn")
+                                      i.fa.fa-search
+                            -}
+                            - i +=1
+                            |                                                      
+                          |                            
+                          .content.table-responsive
+                            table.table.table-hover.table-striped.table-bordered.v-middle.text-center
+                              thead
+                                each vals,key in val[0]
+                                  -if((action == true) && (Object.keys(val[0])[Object.getOwnPropertyNames(val[0]).length-1] == key)){
+                                    th.rw #{key}
+                                    th.rw Action
+                                  -} else{
+                                    th.rw #{key}
+                                  -}
+                              -if(cond =='table'){
+                                tbody
+                                  - p = 0
+                                  each item in val
+                                    -p+=1
+                                    -if(p === 5){
+                                      - break;
+                                    -}
+                                    tr 
+                                      each vals,key in item 
+                                        td #{vals}    
+                              -}else{
+                                tbody
+                                  input(type='text' id='tablename' name='tablename' value='#{tablenames[0]}' style='display:none;')
+                                  each item in val
+                                    input(type="text" id="id" name="id" value="#{Object.keys(item)[0]}" style='display:none;')
+                                    tr 
+                                      each vals,key in item 
+
+                                        td #{vals}   
+                                      td 
+                                        input.btn.btn-warning(type='submit' id='#{item[Object.keys(item)[0]]}' name='#{item[Object.keys(item)[0]]}' value='EDIT')
+                                        input.btn.btn-danger.gg(type='submit' class ='delete' name='#{item[Object.keys(item)[0]]}' value='DELETE')
+                                        input(type="text" id="confirm" name="confirm" value="" style='display:none;')
+                              -}
+          -}      
+        hr.featurette-divider                                                          
+        |         
+        footer.footer.fixed
+          .container-fluid
+            nav.pull-left
+              ul
+
+            |                 
+            p.copyright.pull-right
+              | &copy; 
+              script.
+                document.write(new Date().getFullYear())
+              |  
+              a(href='/') WIMS
+              p
+              a(href='#') Back to top
+
+// Core JS Files
+script(src='/javascripts/jquery.3.2.1.min.js' type='text/javascript')
+  | &#x9;
+script(src='/javascripts/bootstrap.min.js' type='text/javascript')
+  // Charts Plugin
+script(src='/javascripts/chartist.min.js')
+  // Notifications Plugin
+script(src='/javascripts/bootstrap-notify.js')
+  // Google Maps Plugin
+script(type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+  // Light Bootstrap Table Core javascript and methods for Demo purpose
+script(src='/javascripts/light-bootstrap-dashboard.js?v=1.4.0')
+  // Light Bootstrap Table DEMO methods, don't include it in your project!
+script(src='/javascripts/mine.js')

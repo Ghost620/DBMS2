@@ -1,0 +1,150 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    | &#x9;
+    link(rel='icon', type='image/png', href='/images/favicon.ico')
+    | &#x9;
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    | &#x9;
+    title WIMS - We Manage (CONTACT US)
+    | &#x9;
+    meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
+    |     
+    meta(name='viewport', content='width=device-width')
+    // Bootstrap core CSS
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    // Animation library for notifications
+    link(href='/stylesheets/animate.min.css', rel='stylesheet')
+    // Light Bootstrap Table core CSS
+    link(href='/stylesheets/light-bootstrap-dashboard.css?v=1.4.0', rel='stylesheet')
+    // CSS for Demo Purpose, don't include it in your project
+    link(href='/stylesheets/demo.css', rel='stylesheet')
+    // Fonts and icons
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    |     
+    link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300', rel='stylesheet', type='text/css')
+    |     
+    link(href='/stylesheets/pe-icon-7-stroke.css', rel='stylesheet')
+    link(rel='canonical' href='https://getbootstrap.com/docs/4.0/components/buttons/')
+    link(rel="stylesheet" href="/stylesheets/style.css")
+
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src="/javascripts/mine.js")
+  body
+    .wrapper.d-flex.justify-content-center
+      .sidebar(data-color='', data-image='/images/sidebar-4.jpg')
+        //
+          Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+          Tip 2: you can also add an image using data-image tag
+        .sidebar-wrapper
+          .logo
+            a.simple-text(href='/')
+              | WIMS
+          |             
+          ul.nav
+            li
+              a(href='/')
+                i.pe-7s-graph
+                |                         
+                p DASHBOARD
+            |                 
+            li
+              a(href='/team')
+                i.pe-7s-users
+                |                         
+                p TEAM
+            |                 
+            li
+              a(href='/about')
+                i.pe-7s-note2
+                |                         
+                p ABOUT
+            |                 
+            li.active
+              a(href='/contactUs')
+                i.pe-7s-news-paper
+                |                         
+                p CONTACT US
+            
+            | &#x9;&#x9;&#x9;&#x9;
+            li.active-pro
+              a(href='')
+                i.pe-7s-user
+                |                         
+                p User : #{user}
+      |     
+      .main-panel
+        nav.navbar.navbar-default.navbar-fixed
+          .container-fluid
+            .navbar-header
+              button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navigation-example-2')
+                span.sr-only Toggle navigation
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+                |                         
+                span.icon-bar
+              |                     
+              h2 CONTACT US
+            |                 
+            .collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-left
+                    
+              |                     
+              ul.nav.navbar-nav.navbar-right
+                |                         
+                li
+                  button.btn.btn-danger.logbtn#ez(type='button' onclick="window.location.href='/logout'")
+                    | LOGOUT
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                li.separator.hidden-lg
+
+        |         
+        .content
+          .container-fluid
+            hr.featurette-divider
+            form
+                .bd-example
+                .mb-3
+                    label.form-label(for='exampleFormControlInput1') Email address
+                    input#exampleFormControlInput1.form-control(type='email' placeholder='name@example.com')
+                    |  <br>
+                .mb-3.my-3
+                    label.form-label(for='exampleFormControlTextarea1') Write your concerns
+                    textarea#exampleFormControlTextarea1.form-control(rows='3' style='margin-top: 0px; margin-bottom: 0px; height: 129px;')
+                    |  <br>
+            button.btn.btn-primary(type='button') Submit
+            hr.featurette-divider
+        |         
+        footer.footer
+          .container-fluid
+            nav.pull-left
+              ul
+
+            |                 
+            p.copyright.pull-right
+              | &copy; 
+              script.
+                document.write(new Date().getFullYear())
+              |  
+              a(href='/') WIMS
+              p
+              a(href='#') Back to top
+
+
+// Core JS Files
+script(src='/javascripts/jquery.3.2.1.min.js' type='text/javascript')
+  | &#x9;
+script(src='/javascripts/bootstrap.min.js' type='text/javascript')
+  // Charts Plugin
+script(src='/javascripts/chartist.min.js')
+  // Notifications Plugin
+script(src='/javascripts/bootstrap-notify.js')
+  // Google Maps Plugin
+script(type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE')
+  // Light Bootstrap Table Core javascript and methods for Demo purpose
+script(src='/javascripts/light-bootstrap-dashboard.js?v=1.4.0')
+  // Light Bootstrap Table DEMO methods, don't include it in your project!
+script(src='/javascripts/mine.js')
+
